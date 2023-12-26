@@ -89,7 +89,7 @@ The simulation is very simple to use. The simulation will start automatically wh
 
 ## Demo
 
-<img src="https://ghostscypher.github.io/a_star/src/index.html" title="A*_search_algorithm" width="100%" height="500px">
+<img src="https://raw.githubusercontent.com/ghostscypher/a_star/output/demo.gif" alt="A*_search_algorithm">
 
 ## References
 
