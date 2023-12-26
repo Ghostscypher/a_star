@@ -536,7 +536,7 @@ class A_Star {
 
     showPath(possible = false) {
         // If there is no solution then set the color to red
-        for (let i = 1; i < this.path.length - 1; i++) {
+        for (let i = 0; i < this.path.length; i++) {
             this.path[i].showPath(possible);
         }
 
