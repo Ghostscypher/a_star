@@ -466,6 +466,7 @@ class A_Star {
 
                     // Add the neighbor to the open set
                     this.openSet.push(neighbor);
+                    current.visited = true;
                 }
 
                 // Set the neighbor's h score to the heuristic
@@ -604,7 +605,7 @@ class A_Star {
                 cell.show();
 
                 // Show the visited cells
-                cell.showVisited();
+                // cell.showVisited();
             }
         }
 
