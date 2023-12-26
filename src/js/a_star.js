@@ -289,8 +289,12 @@ class Cell {
 
 class A_Star {
 
-    constructor(maze, start = null, end = null) {
+    constructor(maze, start = null, end = null, col = null, row = null) {
         this.maze = maze;
+
+        // Col and row
+        this.col = col ? col : 15;
+        this.row = row ? row : 15;
 
         if (start) {
             this.start = start;
@@ -301,12 +305,12 @@ class A_Star {
         if (end) {
             this.end = end;
         } else {
-            this.end = maze[COL - 1][ROW - 1];
+            this.end = maze[this.col - 1][this.row - 1];
         }
 
         // If end == start then set end to the last cell
         if (this.start === this.end) {
-            this.end = maze[COL - 1][ROW - 1];
+            this.end = maze[this.col - 1][this.row - 1];
         }
 
         this.start.showStart();
@@ -316,6 +320,7 @@ class A_Star {
         this.closedSet = [];
         this.path = [];
         this.no_solution = false;
+
 
         // Add the start cell to the open set
         this.openSet.push(this.start);
@@ -337,8 +342,8 @@ class A_Star {
     }
 
     randomlyCloseWalls() {
-        for (let i = 0; i < COL; i++) {
-            for (let j = 0; j < ROW; j++) {
+        for (let i = 0; i < this.col; i++) {
+            for (let j = 0; j < this.row; j++) {
                 let probability_of_closing = 0.001;
                 let cell = maze[i][j];
 
@@ -482,13 +487,14 @@ class A_Star {
         this.openSet = [];
         this.closedSet = [];
         this.path = [];
+        this.paths = [];
         this.no_solution = false;
 
         this.openSet.push(this.start);
 
         // For each cell in the maze, reset
-        for (let i = 0; i < COL; i++) {
-            for (let j = 0; j < ROW; j++) {
+        for (let i = 0; i < this.col; i++) {
+            for (let j = 0; j < this.row; j++) {
                 maze[i][j].reset();
             }
         }
@@ -555,8 +561,8 @@ class A_Star {
 
     show() {
         // Draw the maze
-        for (let i = 0; i < COL; i++) {
-            for (let j = 0; j < ROW; j++) {
+        for (let i = 0; i < this.col; i++) {
+            for (let j = 0; j < this.row; j++) {
                 // Get the current cell
                 let cell = maze[i][j];
 

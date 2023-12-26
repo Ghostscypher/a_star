@@ -20,17 +20,27 @@ function setup() {
     // Generate the maze
     maze = generateMaze(COL, ROW, generate_maze_with_walls);
 
+    // Create new Maze
+    createNewMaze();
+
+    // Set the frame rate
+    frameRate(10);
+}
+
+function createNewMaze() {
     // Get random end
+    maze = generateMaze(COL, ROW, generate_maze_with_walls);
     let start = maze[0][0];
+
     // let end = maze[COL - 1][ROW - 1];
     let end = maze[Math.floor(random(COL))][Math.floor(random(ROW))];
 
     // Create the A_Star object
-    a_star = new A_Star(maze, start, end);
-    a_star.randomlyCloseWalls();
+    a_star = new A_Star(maze, start, end, COL, ROW);
 
-    // Set the frame rate
-    frameRate(10);
+    if (generate_maze_with_walls) {
+        a_star.randomlyCloseWalls();
+    }
 }
 
 // Generate a maze
@@ -122,16 +132,8 @@ function keyPressed() {
         // Generate the maze
         maze = generateMaze(COL, ROW, generate_maze_with_walls);
 
-        // Get random end
-        let start = maze[0][0];
-        let end = maze[Math.floor(random(COL))][Math.floor(random(ROW))];
-
-        // Create the A_Star object
-        a_star = new A_Star(maze, start, end);
-
-        if (generate_maze_with_walls) {
-            a_star.randomlyCloseWalls();
-        }
+        // Generate new maze
+        createNewMaze();
 
         // Reset the loop
         loop();
@@ -140,19 +142,8 @@ function keyPressed() {
     if (key === 'w' || key === 'W') {
         generate_maze_with_walls = !generate_maze_with_walls;
 
-        // Generate the maze
-        maze = generateMaze(COL, ROW, generate_maze_with_walls);
-
-        // Get random end
-        let start = maze[0][0];
-        let end = maze[Math.floor(random(COL))][Math.floor(random(ROW))];
-
-        // Create the A_Star object
-        a_star = new A_Star(maze, start, end);
-
-        if (generate_maze_with_walls) {
-            a_star.randomlyCloseWalls();
-        }
+        // Generate new maze
+        createNewMaze();
 
         // Reset the loop
         loop();
