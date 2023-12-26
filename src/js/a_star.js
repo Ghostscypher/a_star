@@ -181,21 +181,21 @@ class Cell {
         noStroke();
 
         if (!solution) {
-            fill(0, 255, 0, 40);
+            fill(0, 255, 0, 20);
         } else {
-            fill(255, 0, 0, 40);
+            fill(255, 0, 0, 20);
         }
 
-        rect(x, y, this.w, this.w);
+        rect(x, y, this.w - 1, this.w - 1);
     }
 
     showPath(possible = false) {
         let x = this.i * this.w;
         let y = this.j * this.w;
 
-        noStroke();
-        fill(0, 0, 255, 20);
-        rect(x, y, this.w, this.w);
+        // noStroke();
+        // fill(0, 0, 255, 20);
+        // rect(x, y, this.w, this.w);
 
         // Draw a line from the center of the current cell to the center of the previous cell
         if (!this.previous) {
@@ -203,11 +203,13 @@ class Cell {
         }
 
         if (!possible) {
-            stroke(14, 255, 255, 150);
+            stroke(14, 255, 100, 100);
+            strokeWeight(4);
         } else {
-            stroke(255, 0, 255, 100);
+            stroke(255, 100, 0, 100);
+            strokeWeight(3);
         }
-        strokeWeight(8);
+
         line(x + this.w / 2, y + this.w / 2, this.previous.i * this.w + this.w / 2, this.previous.j * this.w + this.w / 2);
     }
 
@@ -223,8 +225,8 @@ class Cell {
         push();
         beginShape()
         noFill();
-        stroke(255, 255, 255, 200);
-        strokeWeight(5);
+        stroke(255, 0, 0, 255);
+        strokeWeight(3);
         line(x + this.w / 2, y + this.w / 2, this.previous.i * this.w + this.w / 2, this.previous.j * this.w + this.w / 2);
         endShape()
         pop();
@@ -279,7 +281,7 @@ class Cell {
         let x = this.i * this.w;
         let y = this.j * this.w;
 
-        stroke(255, 255, 200, 255);
+        stroke(255, 255, 255, 100);
 
         if (this.walls[0]) {
             line(x, y, x + this.w, y);
