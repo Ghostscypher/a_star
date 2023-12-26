@@ -203,12 +203,31 @@ class Cell {
         }
 
         if (!possible) {
-            stroke(0, 0, 255, 100);
+            stroke(14, 255, 255, 150);
         } else {
             stroke(255, 0, 255, 100);
         }
         strokeWeight(8);
         line(x + this.w / 2, y + this.w / 2, this.previous.i * this.w + this.w / 2, this.previous.j * this.w + this.w / 2);
+    }
+
+    showCurrentPath() {
+        let x = this.i * this.w;
+        let y = this.j * this.w;
+
+        // Draw line from the center of the current cell to the center of the previous cell
+        if (!this.previous) {
+            return;
+        }
+
+        push();
+        beginShape()
+        noFill();
+        stroke(255, 255, 255, 200);
+        strokeWeight(5);
+        line(x + this.w / 2, y + this.w / 2, this.previous.i * this.w + this.w / 2, this.previous.j * this.w + this.w / 2);
+        endShape()
+        pop();
     }
 
     showStart() {
@@ -320,7 +339,6 @@ class A_Star {
         this.closedSet = [];
         this.path = [];
         this.no_solution = false;
-
 
         // Add the start cell to the open set
         this.openSet.push(this.start);
@@ -475,6 +493,20 @@ class A_Star {
 
                 // Return null
                 return null;
+            }
+
+            // Get the path from the current cell
+            let temp_path = [];
+
+            // If there is a path
+            while (current.previous) {
+                temp_path.push(current.previous);
+                current = current.previous;
+            }
+
+            // Draw the path
+            for (let i = 0; i < temp_path.length; i++) {
+                temp_path[i].showCurrentPath();
             }
 
         }

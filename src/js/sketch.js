@@ -1,5 +1,5 @@
-const COL = 15;
-const ROW = 15;
+const COL = 20;
+const ROW = 20;
 
 let cell_size = 0;
 
