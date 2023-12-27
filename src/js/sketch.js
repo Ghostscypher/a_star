@@ -219,10 +219,12 @@ function draw() {
     a_star.show();
 
     // Display info
-    fill(255, 255, 255, select_mode ? 255 : 150);
-    noStroke();
-    textSize(12);
-    text(`Mode: ${select_mode ? 'Select' : 'None'}`, 10, 10);
-    text(`Paused: ${is_paused ? 'true' : 'false'}`, 10, 20);
-    text(`Walls: ${generate_maze_with_walls ? 'true' : 'false'}`, 10, 30);
+    if (is_paused) {
+        fill(255, 255, 255, select_mode ? 255 : 150);
+        noStroke();
+        textSize(12);
+        text(`Mode: ${select_mode ? 'Select' : 'None'}`, 10, 10);
+        text(`Paused: ${is_paused ? 'true' : 'false'}`, 10, 20);
+        text(`Walls: ${generate_maze_with_walls ? 'true' : 'false'}`, 10, 30);
+    }
 }
