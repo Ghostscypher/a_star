@@ -212,7 +212,7 @@ function draw() {
     drawGrid();
 
     // Solve the maze
-    if (!select_mode) {
+    if (!select_mode && a_star.path.length === 0) {
         a_star.solve();
     }
 

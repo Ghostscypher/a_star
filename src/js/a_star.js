@@ -341,6 +341,7 @@ class A_Star {
         this.closedSet = [];
         this.path = [];
         this.no_solution = false;
+        this.solved = false;
 
         // Show scores
         this.show_scores = false;
@@ -401,6 +402,18 @@ class A_Star {
         }
     }
 
+    getPath(current) {
+        let temp_path = [];
+
+        // If there is a path
+        while (current.previous) {
+            temp_path.push(current.previous);
+            current = current.previous;
+        }
+
+        return temp_path;
+    }
+
     solve() {
         // If there are still cells to check
         if (this.openSet.length > 0) {
@@ -417,16 +430,11 @@ class A_Star {
 
             // If the current cell is the end cell
             if (current === this.end) {
-                // Find the path
-                let temp = current;
-                this.path = [];
+                // Get the path from the current cell
+                this.path = this.getPath(current);
 
-                this.path.push(temp);
-
-                while (temp.previous) {
-                    this.path.push(temp.previous);
-                    temp = temp.previous;
-                }
+                // Set the solved property to true
+                this.solved = true;
 
                 // Return the path
                 return this.path;
@@ -502,13 +510,7 @@ class A_Star {
             }
 
             // Get the path from the current cell
-            let temp_path = [];
-
-            // If there is a path
-            while (current.previous) {
-                temp_path.push(current.previous);
-                current = current.previous;
-            }
+            let temp_path = this.getPath(current);
 
             // Draw the path
             for (let i = 0; i < temp_path.length; i++) {
@@ -540,6 +542,11 @@ class A_Star {
 
     showPath(possible = false) {
         // If there is no solution then set the color to red
+        // Push the last cell to the path
+        if (this.solved) {
+            this.path.push(this.end);
+        }
+
         for (let i = 0; i < this.path.length; i++) {
             this.path[i].showPath(possible);
         }
