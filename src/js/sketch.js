@@ -119,7 +119,6 @@ function keyPressed() {
         if (is_paused) {
             select_mode = true;
             draw();
-            noLoop();
         } else {
             select_mode = false;
             start_selected = false;

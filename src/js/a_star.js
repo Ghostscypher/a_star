@@ -529,6 +529,7 @@ class A_Star {
         this.path = [];
         this.paths = [];
         this.no_solution = false;
+        this.solved = false;
 
         this.openSet.push(this.start);
 
