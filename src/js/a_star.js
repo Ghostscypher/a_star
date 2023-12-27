@@ -342,6 +342,9 @@ class A_Star {
         this.path = [];
         this.no_solution = false;
 
+        // Show scores
+        this.show_scores = false;
+
         // Add the start cell to the open set
         this.openSet.push(this.start);
 
@@ -594,7 +597,35 @@ class A_Star {
         }
     }
 
+    showScores() {
+        if (!this.show_scores) {
+            return;
+        }
+
+        push();
+        textSize(10);
+        fill(255, 255, 255, 100);
+        noStroke();
+
+        // For each cell in the maze, show the f,g,h values
+        for (let i = 0; i < this.col; i++) {
+            for (let j = 0; j < this.row; j++) {
+                let cell = maze[i][j];
+                let rounded_f = round(cell.f * 100) / 100;
+                let rounded_g = round(cell.g * 100) / 100;
+                let rounded_h = round(cell.h * 100) / 100;
+
+                text(`f: ${rounded_f}`, cell.i * cell.w + 5, cell.j * cell.w + 10);
+                text(`g: ${rounded_g}`, cell.i * cell.w + 5, cell.j * cell.w + 20);
+                text(`h: ${rounded_h}`, cell.i * cell.w + 5, cell.j * cell.w + 30);
+            }
+        }
+
+        pop();
+    }
+
     show() {
+        push();
         // Draw the maze
         for (let i = 0; i < this.col; i++) {
             for (let j = 0; j < this.row; j++) {
@@ -621,6 +652,9 @@ class A_Star {
 
         // Show possible paths
         this.showPossiblePaths();
+
+        // Show scores
+        this.showScores();
     }
 
 }

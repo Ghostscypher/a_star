@@ -148,6 +148,12 @@ function keyPressed() {
         // Reset the loop
         loop();
     }
+
+    if (key === 't' || key === 'T') {
+        a_star.show_scores = !a_star.show_scores;
+
+        draw();
+    }
 }
 
 let start_selected = false;
